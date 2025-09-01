@@ -1,0 +1,1498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>部署方案向导</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-server"></i>
+                <h1>部署方案向导</h1>
+            </div>
+        </header>
+        
+        <!-- 快速导航 -->
+        <div class="quick-nav">
+            <h3 class="nav-title">快速导航</h3>
+            <div class="nav-links">
+                <div class="nav-link" data-section="deployment-scenario">方案选择</div>
+                <div class="nav-link" data-section="selection-guide">选型手册</div>
+                <div class="nav-link" data-section="scenario-section">部署方案</div>
+                <div class="nav-link" data-section="compatibility-explanation">兼容性说明</div>
+                <div class="nav-link" data-section="compatibility-detection">部署兼容性检测</div>
+                <div class="nav-link" data-section="detail-section">部署详情</div>
+            </div>
+        </div>
+        
+        <!-- 部署方案选择区域 -->
+        <section class="deployment-scenario" id="deployment-scenario">
+            <div class="scenario-header" data-action="toggle-section">
+                <i class="fas fa-clipboard-list"></i>
+                <h2>部署方案选择</h2>
+                <button class="toggle-btn">
+                    <i class="fas fa-chevron-up"></i>
+                </button>
+            </div>
+            
+            <div class="scenario-content">
+                <p style="margin-bottom: 15px; color: #94a3b8;">请选择需要测试的场景（可多选）：</p>
+                
+                <div class="scenario-options">
+                    <div class="scenario-option disabled selected" data-action="toggle-scenario" data-scenario="xdr">
+                        <input type="checkbox" id="scenario-xdr" checked disabled>
+                        <label for="scenario-xdr">需要测试XDR</label>
+                    </div>
+                    
+                    <div class="scenario-option" data-action="toggle-scenario" data-scenario="dsp">
+                        <input type="checkbox" id="scenario-dsp">
+                        <label for="scenario-dsp">需要测试DSP</label>
+                    </div>
+                    
+                    <div class="scenario-option" data-action="toggle-scenario" data-scenario="network">
+                        <input type="checkbox" id="scenario-network">
+                        <label for="scenario-network">需要测试网数融合</label>
+                    </div>
+                    
+                    <div class="scenario-option" data-action="toggle-scenario" data-scenario="ai">
+                        <input type="checkbox" id="scenario-ai">
+                        <label for="scenario-ai">需要测试智能体</label>
+                    </div>
+                    
+                    <div class="scenario-option" data-action="toggle-scenario" data-scenario="flow-gpt">
+                        <input type="checkbox" id="scenario-flow-gpt">
+                        <label for="scenario-flow-gpt">需要测试流量检测GPT</label>
+                    </div>
+                    
+                    <div class="scenario-option" data-action="toggle-scenario" data-scenario="ops-gpt">
+                        <input type="checkbox" id="scenario-ops-gpt">
+                        <label for="scenario-ops-gpt">需要测试运营GPT</label>
+                    </div>
+                    
+                    <div class="scenario-option" data-action="toggle-scenario" data-scenario="data-gpt">
+                        <input type="checkbox" id="scenario-data-gpt">
+                        <label for="scenario-data-gpt">需要测试数据安全GPT</label>
+                    </div>
+                </div>
+                
+                <div class="confirm-btn-container">
+                    <button class="btn-confirm" data-action="confirm-scenarios">
+                        <i class="fas fa-check-circle"></i> 确定部署方案
+                    </button>
+                </div>
+                
+                <div class="deployment-recommendation" id="deployment-recommendation">
+                    <h4><i class="fas fa-lightbulb"></i> 部署方案建议</h4>
+                    <p id="recommendation-text"></p>
+                    
+                    <div class="scenario-sections">
+                    <!-- XDR+GPT部署方案 -->
+                    <section class="scenario-section" id="xdr-gpt-section" style="display: none;">
+                        <div class="scenario-card" id="gpt-card" data-action="select-scenario" data-scenario="gpt">
+                            <div class="card-header">
+                                <div class="card-icon">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <div>
+                                    <h2 class="card-title">GPT 部署</h2>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <ul class="requirements">
+                                    <li><i class="fas fa-check-circle"></i> 高性能计算资源</li>
+                                    <li><i class="fas fa-check-circle"></i> 大规模数据处理</li>
+                                    <li><i class="fas fa-check-circle"></i> 智能分析能力</li>
+                                    <li><i class="fas fa-check-circle"></i> GPU加速支持</li>
+                                    <li><i class="fas fa-check-circle"></i> 高速网络连接</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer">
+                                <div class="time-estimate">
+                                    <i class="far fa-clock"></i>
+                                    <span>部署时间: 75-90分钟</span>
+                                </div>
+                                <button class="btn btn-outline" data-action="view-details" data-scenario="gpt">查看部署详情</button>
+                            </div>
+                        </div>
+                        
+                        <div class="scenario-card" id="xdr-card" data-action="select-scenario" data-scenario="xdr">
+                            <div class="card-header">
+                                <div class="card-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div>
+                                    <h2 class="card-title">XDR 部署</h2>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <ul class="requirements">
+                                    <li><i class="fas fa-check-circle"></i> 安全威胁检测</li>
+                                    <li><i class="fas fa-check-circle"></i> 事件响应管理</li>
+                                    <li><i class="fas fa-check-circle"></i> 安全态势分析</li>
+                                    <li><i class="fas fa-check-circle"></i> 多源数据采集</li>
+                                    <li><i class="fas fa-check-circle"></i> 实时监控告警</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer">
+                                <div class="time-estimate">
+                                    <i class="far fa-clock"></i>
+                                    <span>部署时间: 45-70分钟</span>
+                                </div>
+                                <button class="btn btn-outline" data-action="view-details" data-scenario="xdr">查看部署详情</button>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- AI安全平台部署方案 -->
+                    <section class="scenario-section" id="ai-platform-section" style="display: none;">
+                        <div class="scenario-card" data-action="select-scenario" data-scenario="data-base">
+                            <div class="card-header">
+                                <div class="card-icon">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                                <div>
+                                    <h2 class="card-title">数据底座部署</h2>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <ul class="requirements">
+                                    <li><i class="fas fa-check-circle"></i> 3台XDR-C3500设备</li>
+                                    <li><i class="fas fa-check-circle"></i> 大规模数据存储</li>
+                                    <li><i class="fas fa-check-circle"></i> 数据采集与处理</li>
+                                    <li><i class="fas fa-check-circle"></i> 实时数据流处理</li>
+                                    <li><i class="fas fa-check-circle"></i> 高可用数据架构</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer">
+                                <div class="time-estimate">
+                                    <i class="far fa-clock"></i>
+                                    <span>部署时间: 60-90分钟</span>
+                                </div>
+                                <button class="btn btn-outline" data-action="view-details" data-scenario="data-base">查看部署详情</button>
+                            </div>
+                        </div>
+                        
+                        <div class="scenario-card" data-action="select-scenario" data-scenario="ai-platform">
+                            <div class="card-header">
+                                <div class="card-icon">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <div>
+                                    <h2 class="card-title">AI安全平台部署</h2>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <ul class="requirements">
+                                    <li><i class="fas fa-check-circle"></i> 3台XDR-D3700设备</li>
+                                    <li><i class="fas fa-check-circle"></i> AI算法引擎</li>
+                                    <li><i class="fas fa-check-circle"></i> 威胁智能分析</li>
+                                    <li><i class="fas fa-check-circle"></i> 行为模式识别</li>
+                                    <li><i class="fas fa-check-circle"></i> 实时安全响应</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer">
+                                <div class="time-estimate">
+                                    <i class="far fa-clock"></i>
+                                    <span>部署时间: 75-105分钟</span>
+                                </div>
+                                <button class="btn btn-outline" data-action="view-details" data-scenario="ai-platform">查看部署详情</button>
+                            </div>
+                        </div>
+                        
+                        <div class="scenario-card" data-action="select-scenario" data-scenario="aicp">
+                            <div class="card-header">
+                                <div class="card-icon">
+                                    <i class="fas fa-cogs"></i>
+                                </div>
+                                <div>
+                                    <h2 class="card-title">AICP部署</h2>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <ul class="requirements">
+                                    <li><i class="fas fa-check-circle"></i> AI计算平台</li>
+                                    <li><i class="fas fa-check-circle"></i> 模型训练与推理</li>
+                                    <li><i class="fas fa-check-circle"></i> 智能决策引擎</li>
+                                    <li><i class="fas fa-check-circle"></i> 模型管理服务</li>
+                                    <li><i class="fas fa-check-circle"></i> 持续学习能力</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer">
+                                <div class="time-estimate">
+                                    <i class="far fa-clock"></i>
+                                    <span>部署时间: 6-8小时</span>
+                                </div>
+                                <button class="btn btn-outline" data-action="view-details" data-scenario="aicp">查看部署详情</button>
+                            </div>
+                        </div>
+                    </section>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 选型手册模块 -->
+        <section class="selection-guide" id="selection-guide">
+            <div class="guide-header" data-action="toggle-section">
+                <i class="fas fa-book"></i>
+                <h2>选型手册</h2>
+                <button class="toggle-btn">
+                    <i class="fas fa-chevron-up"></i>
+                </button>
+            </div>
+            
+            <div class="guide-content" style="display:none">
+                <div class="deployment-schemes-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <!-- XDR+GPT部署方案选型手册 -->
+                    <div class="deployment-scheme" style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(29, 78, 216, 0.05) 100%); border: 1px solid rgba(37, 99, 235, 0.3); border-radius: 12px; padding: 20px; box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15); position: relative; overflow: hidden; height: fit-content;">
+                        <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: rgba(37, 99, 235, 0.1); border-radius: 50%; z-index: 0;"></div>
+                        <div style="position: relative; z-index: 1;">
+                            <h3 style="color: #2563eb; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; font-size: 1.3rem; font-weight: 700;">
+                                <span style="background: rgba(37, 99, 235, 0.2); width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-shield-alt" style="color: #2563eb;"></i>
+                                </span>
+                                XDR+GPT部署方案
+                            </h3>
+                            
+                            <div class="hardware-grid" style="display: flex; flex-direction: column; gap: 15px;">
+                                <!-- 选型手册查看 -->
+                                <div class="hardware-item" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(37, 99, 235, 0.3); border-radius: 10px; padding: 15px; backdrop-filter: blur(10px);">
+                                    <h4 class="hardware-title" style="color: #3b82f6; display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 1.1rem;">
+                                        <i class="fas fa-book" style="color: #2563eb;"></i>
+                                        选型手册
+                                    </h4>
+                                    <p style="margin-bottom: 12px; color: #cbd5e1; font-size: 0.9rem;">全面的XDR与GPT部署选型指南，包含硬件要求、网络拓扑和部署建议</p>
+                                    <button class="btn btn-primary" data-action="open-url" data-url="https://support.sangfor.com.cn/productDocument/read?product_id=141&version_id=1132&category_id=329758" style="width: 100%; padding: 10px; font-size: 0.9rem;">
+                                        <i class="fas fa-eye"></i> 查看详情
+                                    </button>
+                                </div>
+                                
+                                <!-- 选型手册下载 -->
+                                <div class="hardware-item" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(37, 99, 235, 0.3); border-radius: 10px; padding: 15px; backdrop-filter: blur(10px);">
+                                    <h4 class="hardware-title" style="color: #3b82f6; display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 1.1rem;">
+                                        <i class="fas fa-download" style="color: #2563eb;"></i>
+                                        选型手册下载
+                                    </h4>
+                                    <p style="margin-bottom: 12px; color: #cbd5e1; font-size: 0.9rem;">包含XDR+GPT部署选型手册工具</p>
+                                    <button class="btn" style="background: #2563eb; border-color: #2563eb; width: 100%; padding: 10px; font-size: 0.9rem;" data-action="open-url" data-url="https://doc.weixin.qq.com/sheet/e3_AWMAiQZmAHYCNZ72xoqAQSUKPWssS?scode=AI4AagdpABES9A8UpmAecAYQYhAAk&tab=000002">
+                                        <i class="fas fa-download"></i> 下载
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI安全平台部署方案选型手册 -->
+                    <div class="deployment-scheme" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(13, 148, 136, 0.05) 100%); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 20px; box-shadow: 0 8px 25px rgba(16, 185, 129, 0.15); position: relative; overflow: hidden; height: fit-content;">
+                        <div style="position: absolute; top: -20px; left: -20px; width: 100px; height: 100px; background: rgba(16, 185, 129, 0.1); border-radius: 50%; z-index: 0;"></div>
+                        <div style="position: relative; z-index: 1;">
+                            <h3 style="color: #10b981; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; font-size: 1.3rem; font-weight: 700;">
+                                <span style="background: rgba(16, 185, 129, 0.2); width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-brain" style="color: #10b981;"></i>
+                                </span>
+                                AI安全平台部署方案
+                            </h3>
+                            
+                            <div class="hardware-grid" style="display: flex; flex-direction: column; gap: 15px;">
+                                <!-- 选型手册查看 -->
+                                <div class="hardware-item" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 10px; padding: 15px; backdrop-filter: blur(10px);">
+                                    <h4 class="hardware-title" style="color: #10b981; display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 1.1rem;">
+                                        <i class="fas fa-book" style="color: #10b981;"></i>
+                                        选型手册
+                                    </h4>
+                                    <p style="margin-bottom: 12px; color: #cbd5e1; font-size: 0.9rem;">AI安全平台部署选型指南，包含数据底座、AI平台和AICP的硬件要求</p>
+                                    <button class="btn" style="background: #10b981; border-color: #10b981; width: 100%; padding: 10px; font-size: 0.9rem;" data-action="open-url" data-url="https://support.sangfor.com.cn/productDocument/read?product_id=212&version_id=1114&category_id=322128">
+                                        <i class="fas fa-eye"></i> 查看详情
+                                    </button>
+                                </div>
+                                
+                                <!-- 选型手册下载 -->
+                                <div class="hardware-item" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 10px; padding: 15px; backdrop-filter: blur(10px);">
+                                    <h4 class="hardware-title" style="color: #10b981; display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 1.1rem;">
+                                        <i class="fas fa-download" style="color: #10b981;"></i>
+                                        选型手册下载
+                                    </h4>
+                                    <p style="margin-bottom: 12px; color: #cbd5e1; font-size: 0.9rem;">包含AI安全平台选型手册工具</p>
+                                    <button class="btn" style="background: #10b981; border-color: #10b981; width: 100%; padding: 10px; font-size: 0.9rem;" data-action="open-url" data-url="https://doc.weixin.qq.com/sheet/e3_ARsAZQYhAAkCNISxcJRjlRnyW5MvL?scode=AI4AagdpABEyZrfox0AecAYQYhAAk&tab=000002">
+                                        <i class="fas fa-download"></i> 下载
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <main>
+            
+            <!-- 兼容性说明 -->
+            <section class="hardware-section" id="compatibility-explanation">
+                <div class="section-header" data-action="toggle-section">
+                    <h3 class="section-title"><i class="fas fa-info-circle"></i> 兼容性说明</h3>
+                    <button class="toggle-btn">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+                
+                <div class="hardware-content" style="display:none">
+                    <!-- XDR+GPT部署方案兼容性 -->
+                    <div class="deployment-scheme" style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(29, 78, 216, 0.05) 100%); border: 1px solid rgba(37, 99, 235, 0.3); border-radius: 12px; padding: 25px; margin-bottom: 30px; box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15); position: relative; overflow: hidden;">
+                        <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: rgba(37, 99, 235, 0.1); border-radius: 50%; z-index: 0;"></div>
+                        <div style="position: relative; z-index: 1;">
+                            <h3 style="color: #2563eb; margin-bottom: 25px; display: flex; align-items: center; gap: 12px; font-size: 1.5rem; font-weight: 700;">
+                                <span style="background: rgba(37, 99, 235, 0.2); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-shield-alt" style="color: #2563eb;"></i>
+                                </span>
+                                XDR+GPT部署方案兼容性
+                            </h3>
+                            
+                            <div class="hardware-grid" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+                                <div class="hardware-item" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(37, 99, 235, 0.3); border-radius: 10px; padding: 20px; backdrop-filter: blur(10px); flex: 1; min-width: 350px; max-width: 500px;">
+                                    <h4 class="hardware-title" style="color: #3b82f6; display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                                        <i class="fas fa-server" style="color: #2563eb;"></i>
+                                        XDR硬件兼容性
+                                    </h4>
+                                    <ul class="specs">
+                                        <li><span class="spec-name">CPU</span><span class="spec-value">≥16核32线程</span></li>
+                                        <li><span class="spec-name">内存</span><span class="spec-value">≥256G (测试项目128G)</span></li>
+                                        <li><span class="spec-name">系统盘</span><span class="spec-value">≥240G SSD</span></li>
+                                        <li><span class="spec-name">数据盘</span><span class="spec-value">≥10T</span></li>
+                                        <li><span class="spec-name">千兆电口</span><span class="spec-value">≥4个</span></li>
+                                        <li><span class="spec-name">万兆光口</span><span class="spec-value">≥2个</span></li>
+                                        <li><span class="spec-name">RAID卡</span><span class="spec-value">9460-8i或9560-8i(支持RAID50)</span></li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="hardware-item" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(37, 99, 235, 0.3); border-radius: 10px; padding: 20px; backdrop-filter: blur(10px); flex: 1; min-width: 350px; max-width: 500px;">
+                                    <h4 class="hardware-title" style="color: #3b82f6; display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                                        <i class="fas fa-microchip" style="color: #2563eb;"></i>
+                                        运营GPT硬件兼容性
+                                    </h4>
+                                    <ul class="specs">
+                                        <li><span class="spec-name">CPU</span><span class="spec-value">≥48核96线程</span></li>
+                                        <li><span class="spec-name">内存</span><span class="spec-value">≥512G</span></li>
+                                        <li><span class="spec-name">系统盘</span><span class="spec-value">≥480G SSD</span></li>
+                                        <li><span class="spec-name">数据盘</span><span class="spec-value">≥32T</span></li>
+                                        <li><span class="spec-name">千兆电口</span><span class="spec-value">≥4个</span></li>
+                                        <li><span class="spec-name">万兆光口</span><span class="spec-value">≥2个</span></li>
+                                        <li><span class="spec-name">RAID卡</span><span class="spec-value">9560-16i (支持RAID10)</span></li>
+                                        <li><span class="spec-name">显卡类型</span><span class="spec-value">4090/4090D</span></li>
+                                        <li><span class="spec-name">显卡数量</span><span class="spec-value">支持4卡、6卡、8卡</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 视觉分隔符 -->
+                    <div style="text-align: center; margin: 30px 0; position: relative;">
+                        <div style="height: 1px; background: linear-gradient(90deg, transparent, #334155, transparent); margin: 0 50px;"></div>
+                    </div>
+
+                    <!-- AI安全平台部署方案兼容性 -->
+                    <div class="deployment-scheme" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(13, 148, 136, 0.05) 100%); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 25px; margin-bottom: 30px; box-shadow: 0 8px 25px rgba(16, 185, 129, 0.15); position: relative; overflow: hidden;">
+                        <div style="position: absolute; top: -20px; left: -20px; width: 100px; height: 100px; background: rgba(16, 185, 129, 0.1); border-radius: 50%; z-index: 0;"></div>
+                        <div style="position: relative; z-index: 1;">
+                            <h3 style="color: #10b981; margin-bottom: 25px; display: flex; align-items: center; gap: 12px; font-size: 1.5rem; font-weight: 700;">
+                                <span style="background: rgba(16, 185, 129, 0.2); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-brain" style="color: #10b981;"></i>
+                                </span>
+                                AI安全平台部署方案兼容性
+                            </h3>
+                            
+                            <div class="hardware-grid" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+                                <div class="hardware-item" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 10px; padding: 20px; backdrop-filter: blur(10px); flex: 1; min-width: 350px; max-width: 500px;">
+                                    <h4 class="hardware-title" style="color: #10b981; display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                                        <i class="fas fa-database" style="color: #10b981;"></i>
+                                        数据底座兼容性
+                                    </h4>
+                                    <ul class="specs">
+                                        <li><span class="spec-name">RAID卡</span><span class="spec-value">9460-8i(支持同时组两个RAID5)</span></li>
+                                        <li><span class="spec-name">CPU</span><span class="spec-value">≥16核32线程</span></li>
+                                        <li><span class="spec-name">内存</span><span class="spec-value">≥256G DDR4</span></li>
+                                        <li><span class="spec-name">系统盘</span><span class="spec-value">480G SSD</span></li>
+                                        <li><span class="spec-name">数据盘1</span><span class="spec-value">4块4T 企业级HDD(<span class="highlight">可用</span>空间12T)</span></li>
+                                        <li><span class="spec-name">数据盘2</span><span class="spec-value">8块4T 企业级HDD(<span class="highlight">可用</span>空间28T)</span></li>
+                                        <li><span class="spec-name">千兆电口</span><span class="spec-value">≥4个</span></li>
+                                        <li><span class="spec-name">万兆光口</span><span class="spec-value">≥2个</span></li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="hardware-item" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 10px; padding: 20px; backdrop-filter: blur(10px); flex: 1; min-width: 350px; max-width: 500px;">
+                                    <h4 class="hardware-title" style="color: #10b981; display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                                        <i class="fas fa-brain" style="color: #10b981;"></i>
+                                        AI安全平台兼容性
+                                    </h4>
+                                    <ul class="specs">
+                                        <li><span class="spec-name">RAID卡</span><span class="spec-value">9460-8i(支持同时组两个RAID5)</span></li>
+                                        <li><span class="spec-name">CPU</span><span class="spec-value">≥48核96线程</span></li>
+                                        <li><span class="spec-name">内存</span><span class="spec-value">512G DDR4</span></li>
+                                        <li><span class="spec-name">系统盘</span><span class="spec-value">480G SSD</span></li>
+                                        <li><span class="spec-name">数据盘1</span><span class="spec-value">4块4T SSD(<span class="highlight">可用</span>空间12T)</span></li>
+                                        <li><span class="spec-name">数据盘2</span><span class="spec-value">8块4T 企业级HDD(<span class="highlight">可用</span>空间28T)</span></li>
+                                        <li><span class="spec-name">千兆电口</span><span class="spec-value">≥4个</span></li>
+                                        <li><span class="spec-name">万兆光口</span><span class="spec-value">≥2个</span></li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="hardware-item" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 10px; padding: 20px; backdrop-filter: blur(10px); flex: 1; min-width: 350px; max-width: 500px;">
+                                    <h4 class="hardware-title" style="color: #10b981; display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                                        <i class="fas fa-cogs" style="color: #10b981;"></i>
+                                        AICP兼容性
+                                    </h4>
+                                    <ul class="specs">
+                                        <li><span class="spec-name">RAID卡</span><span class="spec-value">9540-8i</span></li>
+                                        <li><span class="spec-name">显卡</span><span class="spec-value">4090或者4090D</span></li>
+                                        <li><span class="spec-name">CPU</span><span class="spec-value">≥48核96线程</span></li>
+                                        <li><span class="spec-name">内存</span><span class="spec-value">512G</span></li>
+                                        <li><span class="spec-name">系统盘</span><span class="spec-value">2块480G SSD</span></li>
+                                        <li><span class="spec-name">数据盘1</span><span class="spec-value">2块1.92T SSD</span></li>
+                                        <li><span class="spec-name">数据盘2</span><span class="spec-value">1块1.92T NVME SSD</span></li>
+                                        <li><span class="spec-name">千兆电口</span><span class="spec-value">≥4个</span></li>
+                                        <li><span class="spec-name">万兆光口</span><span class="spec-value">≥4个</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- 部署兼容性检测 -->
+            <section class="hardware-section" id="compatibility-detection">
+                <div class="section-header" data-action="toggle-section">
+                    <h3 class="section-title"><i class="fas fa-search"></i> 部署兼容性检测</h3>
+                    <button class="toggle-btn">
+                        <i class="fas fa-chevron-up"></i>
+                    </button>
+                </div>
+                
+                <div class="hardware-content">
+                
+                <div class="compatibility-check">
+                    <div class="check-header" data-action="toggle-compatibility-check">
+                        <div class="check-header-content">
+                            <i class="fas fa-search"></i>
+                            <h4>硬件兼容性检测</h4>
+                        </div>
+                        <button class="toggle-btn">
+                            <i class="fas fa-chevron-up"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="compatibility-check-content">
+                        <div class="hardware-tabs">
+                            <div class="hardware-tab active" data-action="switch-hardware-tab" data-tab="xdr-gpt">XDR+GPT部署方案</div>
+                            <div class="hardware-tab" data-action="switch-hardware-tab" data-tab="ai-security">AI安全平台</div>
+                        </div>
+                        
+                        
+                        <!-- AI安全平台检测表单 -->
+                        <div id="ai-security-form" class="hardware-form" style="display:none;">
+                            <div style="margin-bottom: 15px;">
+                                <div class="hardware-tabs" style="margin-bottom: 20px;">
+                                    <div class="hardware-tab active" data-action="switch-ai-security-tab" data-tab="data-base" style="border-color: rgba(16, 185, 129, 0.3);">数据底座</div>
+                                    <div class="hardware-tab" data-action="switch-ai-security-tab" data-tab="ai-platform" style="border-color: rgba(16, 185, 129, 0.3);">AI安全平台</div>
+                                    <div class="hardware-tab" data-action="switch-ai-security-tab" data-tab="aicp" style="border-color: rgba(16, 185, 129, 0.3);">AICP</div>
+                                </div>
+                                
+                                <!-- XDR+GPT子选项 -->
+                                <div id="xdr-gpt-subtabs" class="hardware-subtabs" style="display: none; margin-bottom: 20px; margin-top: 10px; padding-left: 20px;">
+                                    <div class="hardware-tab" data-action="switch-ai-security-tab" data-tab="xdr" style="border-color: rgba(16, 185, 129, 0.3); color: #10b981;">X86 XDR</div>
+                                    <div class="hardware-tab" data-action="switch-ai-security-tab" data-tab="operation-gpt" style="border-color: rgba(16, 185, 129, 0.3); color: #10b981;">
+                                        运营GPT
+                                        <div class="info-tooltip">
+                                            <i class="fas fa-info-circle"></i>
+                                            <span class="tooltip-text">运营GPT部署方案</span>
+                                        </div>
+                                    </div>
+                                    <div class="hardware-tab" data-action="switch-ai-security-tab" data-tab="operation-traffic-gpt" style="border-color: rgba(16, 185, 129, 0.3); color: #10b981;">
+                                        运营+流量检测GPT
+                                        <div class="info-tooltip">
+                                            <i class="fas fa-info-circle"></i>
+                                            <span class="tooltip-text">运营+流量检测GPT为同一台8卡设备同时部署运营+流量检测GPT</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 数据底座检测表单 -->
+                            <div id="data-base-form" class="ai-security-subform">
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="data-base-cpu-info">CPU核心数</label>
+                                        <input type="number" id="data-base-cpu-info" class="form-control" placeholder="例如: 32">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="data-base-memory-info">内存大小(GB)</label>
+                                        <input type="number" id="data-base-memory-info" class="form-control" placeholder="例如: 256">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="data-base-system-disk">系统盘大小(GB)</label>
+                                        <input type="number" id="data-base-system-disk" class="form-control" placeholder="例如: 480">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="data-base-data-disk1">数据盘1<span class="highlight">可用</span>容量大小(TB)</label>
+                                        <input type="number" id="data-base-data-disk1" class="form-control" placeholder="例如: 12">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="data-base-data-disk2">数据盘2<span class="highlight">可用</span>容量大小(TB)</label>
+                                        <input type="number" id="data-base-data-disk2" class="form-control" placeholder="例如: 28">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="data-base-gigabit-ports">千兆电口数量</label>
+                                        <input type="number" id="data-base-gigabit-ports" class="form-control" placeholder="例如: 4">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="data-base-ten-gigabit-ports">万兆光口数量</label>
+                                        <input type="number" id="data-base-ten-gigabit-ports" class="form-control" placeholder="例如: 2">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="data-base-raid-info">RAID卡型号</label>
+                                        <input type="text" id="data-base-raid-info" class="form-control" placeholder="例如: 9460-8i">
+                                    </div>
+                                </div>
+                                
+                                <button class="btn btn-primary" data-action="check-compatibility" data-type="data-base">
+                                    <i class="fas fa-check"></i> 检测数据底座兼容性
+                                </button>
+                            </div>
+                            
+                            <!-- AI安全平台检测表单 -->
+                            <div id="ai-platform-form" class="ai-security-subform" style="display:none;">
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="ai-platform-cpu-info">CPU核心数</label>
+                                        <input type="number" id="ai-platform-cpu-info" class="form-control" placeholder="例如: 96">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="ai-platform-memory-info">内存大小(GB)</label>
+                                        <input type="number" id="ai-platform-memory-info" class="form-control" placeholder="例如: 512">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="ai-platform-system-disk">系统盘大小(GB)</label>
+                                        <input type="number" id="ai-platform-system-disk" class="form-control" placeholder="例如: 480">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="ai-platform-data-disk1">数据盘1<span class="highlight">可用</span>容量大小(TB)</label>
+                                        <input type="number" id="ai-platform-data-disk1" class="form-control" placeholder="例如: 12">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="ai-platform-data-disk2">数据盘2<span class="highlight">可用</span>容量大小(TB)</label>
+                                        <input type="number" id="ai-platform-data-disk2" class="form-control" placeholder="例如: 28">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="ai-platform-gigabit-ports">千兆电口数量</label>
+                                        <input type="number" id="ai-platform-gigabit-ports" class="form-control" placeholder="例如: 4">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="ai-platform-ten-gigabit-ports">万兆光口数量</label>
+                                        <input type="number" id="ai-platform-ten-gigabit-ports" class="form-control" placeholder="例如: 2">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="ai-platform-raid-info">RAID卡型号</label>
+                                        <input type="text" id="ai-platform-raid-info" class="form-control" placeholder="例如: 9460-8i">
+                                    </div>
+                                </div>
+                                
+                                <button class="btn btn-primary" data-action="check-compatibility" data-type="ai-platform">
+                                    <i class="fas fa-check"></i> 检测AI安全平台兼容性
+                                </button>
+                            </div>
+                            
+                            <!-- AICP检测表单 -->
+                            <div id="aicp-form" class="ai-security-subform" style="display:none;">
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="aicp-cpu-info">CPU核心数</label>
+                                        <input type="number" id="aicp-cpu-info" class="form-control" placeholder="例如: 96">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="aicp-memory-info">内存大小(GB)</label>
+                                        <input type="number" id="aicp-memory-info" class="form-control" placeholder="例如: 512">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="aicp-system-disk">系统盘大小(GB)</label>
+                                        <input type="number" id="aicp-system-disk" class="form-control" placeholder="例如: 960">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="aicp-data-disk1">数据盘1<span class="highlight">可用</span>容量大小(TB)</label>
+                                        <input type="number" id="aicp-data-disk1" class="form-control" placeholder="例如: 1.92">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="aicp-data-disk2">数据盘2<span class="highlight">可用</span>容量大小(TB)</label>
+                                        <input type="number" id="aicp-data-disk2" class="form-control" placeholder="例如: 1.92">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="aicp-gigabit-ports">千兆电口数量</label>
+                                        <input type="number" id="aicp-gigabit-ports" class="form-control" placeholder="例如: 4">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="aicp-ten-gigabit-ports">万兆光口数量</label>
+                                        <input type="number" id="aicp-ten-gigabit-ports" class="form-control" placeholder="例如: 4">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="aicp-raid-info">RAID卡型号</label>
+                                        <input type="text" id="aicp-raid-info" class="form-control" placeholder="例如: 9540-8i">
+                                    </div>
+                                    
+                                </div>
+                                
+                                <button class="btn btn-primary" data-action="check-compatibility" data-type="aicp">
+                                    <i class="fas fa-check"></i> 检测AICP兼容性
+                                </button>
+                            </div>
+                            
+                            <!-- X86 XDR检测表单 -->
+                            <div id="xdr-form" class="ai-security-subform" style="display:none;">
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="xdr-cpu-info">CPU核心数</label>
+                                        <input type="number" id="xdr-cpu-info" class="form-control" placeholder="例如: 16">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="xdr-memory-info">内存大小(GB)</label>
+                                        <input type="number" id="xdr-memory-info" class="form-control" placeholder="例如: 256">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="xdr-system-disk">系统盘大小(GB)</label>
+                                        <input type="number" id="xdr-system-disk" class="form-control" placeholder="例如: 480">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="xdr-data-disk">数据盘<span class="highlight">可用</span>容量大小(TB)</label>
+                                        <input type="number" id="xdr-data-disk" class="form-control" placeholder="例如: 10">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="xdr-gigabit-ports">千兆电口数量</label>
+                                        <input type="number" id="xdr-gigabit-ports" class="form-control" placeholder="例如: 4">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="xdr-ten-gigabit-ports">万兆光口数量</label>
+                                        <input type="number" id="xdr-ten-gigabit-ports" class="form-control" placeholder="例如: 2">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="xdr-raid-info">RAID卡型号</label>
+                                        <input type="text" id="xdr-raid-info" class="form-control" placeholder="例如: 9560-8i">
+                                    </div>
+                                </div>
+                                
+                                <!-- 新增检测依据说明 -->
+                                <div class="compatibility-instructions">
+                                    <h5><i class="fas fa-info-circle"></i> 检测依据说明</h5>
+                                    <ul>
+                                        <li><strong>CPU核心数、内存大小、系统盘大小、数据盘大小、千兆电口、万兆光口、显卡数量</strong>这些资源少于基线要求无法部署，需要至少补齐到基线</li>
+                                        <li><strong>RAID卡型号、显卡型号</strong>需要为已适配型号，如果客户侧设备RAID卡型号不符，需要定制适配</li>
+                                        <li>网卡驱动可能会存在需要兼容的情况</li>
+                                    </ul>
+                                </div>
+                                
+                                <button class="btn btn-primary" data-action="check-compatibility" data-type="xdr">
+                                    <i class="fas fa-check"></i> 检测部署兼容性
+                                </button>
+                            </div>
+                            
+                            <!-- 运营GPT检测表单 -->
+                            <div id="operation-gpt-form" class="ai-security-subform" style="display:none;">
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="operation-gpt-cpu-info">CPU核心数</label>
+                                        <input type="number" id="operation-gpt-cpu-info" class="form-control" placeholder="例如: 48">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="operation-gpt-memory-info">内存大小(GB)</label>
+                                        <input type="number" id="operation-gpt-memory-info" class="form-control" placeholder="例如: 512">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="operation-gpt-system-disk">系统盘大小(GB)</label>
+                                        <input type="number" id="operation-gpt-system-disk" class="form-control" placeholder="例如: 960">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="operation-gpt-data-disk">数据盘<span class="highlight">裸</span>容量大小(TB)</label>
+                                        <input type="number" id="operation-gpt-data-disk" class="form-control" placeholder="例如: 32">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="operation-gpt-gigabit-ports">千兆电口数量</label>
+                                        <input type="number" id="operation-gpt-gigabit-ports" class="form-control" placeholder="例如: 4">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="operation-gpt-ten-gigabit-ports">万兆光口数量</label>
+                                        <input type="number" id="operation-gpt-ten-gigabit-ports" class="form-control" placeholder="例如: 2">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="operation-gpt-raid-info">RAID卡型号</label>
+                                        <input type="text" id="operation-gpt-raid-info" class="form-control" placeholder="例如: 9560-16i">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="operation-gpt-gpu-type">显卡型号</label>
+                                        <input type="text" id="operation-gpt-gpu-type" class="form-control" placeholder="例如: 4090">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="operation-gpt-gpu-count">显卡数量</label>
+                                        <input type="number" id="operation-gpt-gpu-count" class="form-control" placeholder="例如: 8">
+                                    </div>
+                                </div>
+                                
+                                <!-- 新增检测依据说明 -->
+                                <div class="compatibility-instructions">
+                                    <h5><i class="fas fa-info-circle"></i> 检测依据说明</h5>
+                                    <ul>
+                                        <li><strong>CPU核心数、内存大小、系统盘大小、数据盘大小、千兆电口、万兆光口、显卡数量</strong>这些资源少于基线要求无法部署，需要至少补齐到基线</li>
+                                        <li><strong>RAID卡型号、显卡型号</strong>需要为已适配型号，如果客户侧设备RAID卡型号不符，需要定制适配</li>
+                                        <li>网卡驱动可能会存在需要兼容的情况</li>
+                                    </ul>
+                                </div>
+                                
+                                <button class="btn btn-primary" data-action="check-compatibility" data-type="operation-gpt">
+                                    <i class="fas fa-check"></i> 检测部署兼容性
+                                </button>
+                            </div>
+                            
+                            <!-- 运营+流量检测GPT检测表单 -->
+                            <div id="operation-traffic-gpt-form" class="ai-security-subform" style="display:none;">
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="operation-traffic-gpt-cpu-info">CPU核心数</label>
+                                        <input type="number" id="operation-traffic-gpt-cpu-info" class="form-control" placeholder="例如: 48">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="operation-traffic-gpt-memory-info">内存大小(GB)</label>
+                                        <input type="number" id="operation-traffic-gpt-memory-info" class="form-control" placeholder="例如: 512">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="operation-traffic-gpt-system-disk">系统盘大小(GB)</label>
+                                        <input type="number" id="operation-traffic-gpt-system-disk" class="form-control" placeholder="例如: 960">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="operation-traffic-gpt-data-disk">数据盘<span class="highlight">裸</span>容量大小(TB)</label>
+                                        <input type="number" id="operation-traffic-gpt-data-disk" class="form-control" placeholder="例如: 32">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="operation-traffic-gpt-gigabit-ports">千兆电口数量</label>
+                                        <input type="number" id="operation-traffic-gpt-gigabit-ports" class="form-control" placeholder="例如: 4">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="operation-traffic-gpt-ten-gigabit-ports">万兆光口数量</label>
+                                        <input type="number" id="operation-traffic-gpt-ten-gigabit-ports" class="form-control" placeholder="例如: 2">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="operation-traffic-gpt-raid-info">RAID卡型号</label>
+                                        <input type="text" id="operation-traffic-gpt-raid-info" class="form-control" placeholder="例如: 9560-16i">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="operation-traffic-gpt-gpu-type">显卡型号</label>
+                                        <input type="text" id="operation-traffic-gpt-gpu-type" class="form-control" placeholder="例如: 4090">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="operation-traffic-gpt-gpu-count">显卡数量</label>
+                                        <input type="number" id="operation-traffic-gpt-gpu-count" class="form-control" placeholder="例如: 8">
+                                    </div>
+                                </div>
+                                
+                                <!-- 新增检测依据说明 -->
+                                <div class="compatibility-instructions">
+                                    <h5><i class="fas fa-info-circle"></i> 检测依据说明</h5>
+                                    <ul>
+                                        <li><strong>CPU核心数、内存大小、系统盘大小、数据盘大小、千兆电口、万兆光口、显卡数量</strong>这些资源少于基线要求无法部署，需要至少补齐到基线</li>
+                                        <li><strong>RAID卡型号、显卡型号</strong>需要为已适配型号，如果客户侧设备RAID卡型号不符，需要定制适配</li>
+                                        <li>网卡驱动可能会存在需要兼容的情况</li>
+                                    </ul>
+                                </div>
+                                
+                                <button class="btn btn-primary" data-action="check-compatibility" data-type="operation-traffic-gpt">
+                                    <i class="fas fa-check"></i> 检测部署兼容性
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- XDR+GPT部署方案检测表单 -->
+                        <div id="xdr-gpt-form" class="hardware-form" style="display:block;">
+                            <div class="hardware-tabs" style="margin-bottom: 20px;">
+                                <div class="hardware-tab active" data-action="switch-xdr-gpt-tab" data-tab="xdr" style="border-color: rgba(37, 99, 235, 0.3); ">X86 XDR</div>
+                                <div class="hardware-tab" data-action="switch-xdr-gpt-tab" data-tab="operation-gpt" style="border-color: rgba(37, 99, 235, 0.3); ">
+                                    运营GPT
+                                    <div class="info-tooltip">
+                                        <i class="fas fa-info-circle"></i>
+                                        <span class="tooltip-text">运营GPT部署方案</span>
+                                    </div>
+                                </div>
+                                <div class="hardware-tab" data-action="switch-xdr-gpt-tab" data-tab="operation-traffic-gpt" style="border-color: rgba(37, 99, 235, 0.3); ">
+                                    运营+流量检测GPT
+                                    <div class="info-tooltip">
+                                        <i class="fas fa-info-circle"></i>
+                                        <span class="tooltip-text">运营+流量检测GPT为同一台8卡设备同时部署运营+流量检测GPT</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- X86 XDR检测表单 -->
+                            <div id="xdr-gpt-xdr-form" class="xdr-gpt-subform" style="display:block;">
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="xdr-gpt-xdr-cpu-info">CPU核心数</label>
+                                        <input type="number" id="xdr-gpt-xdr-cpu-info" class="form-control" placeholder="例如: 16">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="xdr-gpt-xdr-memory-info">内存大小(GB)</label>
+                                        <input type="number" id="xdr-gpt-xdr-memory-info" class="form-control" placeholder="例如: 256">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="xdr-gpt-xdr-system-disk">系统盘大小(GB)</label>
+                                        <input type="number" id="xdr-gpt-xdr-system-disk" class="form-control" placeholder="例如: 480">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="xdr-gpt-xdr-data-disk">数据盘<span class="highlight">可用</span>容量大小(TB)</label>
+                                        <input type="number" id="xdr-gpt-xdr-data-disk" class="form-control" placeholder="例如: 10">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="xdr-gpt-xdr-gigabit-ports">千兆电口数量</label>
+                                        <input type="number" id="xdr-gpt-xdr-gigabit-ports" class="form-control" placeholder="例如: 4">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="xdr-gpt-xdr-10g-ports">万兆光口数量</label>
+                                        <input type="number" id="xdr-gpt-xdr-10g-ports" class="form-control" placeholder="例如: 2">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="xdr-gpt-xdr-raid-info">RAID卡型号</label>
+                                        <input type="text" id="xdr-gpt-xdr-raid-info" class="form-control" placeholder="例如: 9560-16i">
+                                    </div>
+                                </div>
+                                
+                                <button class="btn btn-primary" data-action="check-xdr-gpt-compatibility" data-type="xdr">
+                                    <i class="fas fa-check"></i> 检测XDR兼容性
+                                </button>
+                            </div>
+                            
+                            <!-- 运营GPT检测表单 -->
+                            <div id="xdr-gpt-operation-gpt-form" class="xdr-gpt-subform" style="display:none;">
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="xdr-gpt-operation-gpt-cpu-info">CPU核心数</label>
+                                        <input type="number" id="xdr-gpt-operation-gpt-cpu-info" class="form-control" placeholder="例如: 64">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="xdr-gpt-operation-gpt-memory-info">内存大小(GB)</label>
+                                        <input type="number" id="xdr-gpt-operation-gpt-memory-info" class="form-control" placeholder="例如: 512">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="xdr-gpt-operation-gpt-system-disk">系统盘大小(GB)</label>
+                                        <input type="number" id="xdr-gpt-operation-gpt-system-disk" class="form-control" placeholder="例如: 480">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="xdr-gpt-operation-gpt-data-disk">数据盘<span class="highlight">裸</span>容量大小(TB)</label>
+                                        <input type="number" id="xdr-gpt-operation-gpt-data-disk" class="form-control" placeholder="例如: 32">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="xdr-gpt-operation-gpt-gigabit-ports">千兆电口数量</label>
+                                        <input type="number" id="xdr-gpt-operation-gpt-gigabit-ports" class="form-control" placeholder="例如: 4">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="xdr-gpt-operation-gpt-10g-ports">万兆光口数量</label>
+                                        <input type="number" id="xdr-gpt-operation-gpt-10g-ports" class="form-control" placeholder="例如: 2">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="xdr-gpt-operation-gpt-raid-info">RAID卡型号</label>
+                                        <input type="text" id="xdr-gpt-operation-gpt-raid-info" class="form-control" placeholder="例如: 9560-16i">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="xdr-gpt-operation-gpt-gpu-type">显卡型号</label>
+                                        <input type="text" id="xdr-gpt-operation-gpt-gpu-type" class="form-control" placeholder="例如: 4090">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="xdr-gpt-operation-gpt-gpu-count">显卡数量</label>
+                                        <input type="number" id="xdr-gpt-operation-gpt-gpu-count" class="form-control" placeholder="例如: 8">
+                                    </div>
+                                </div>
+                                
+                                <button class="btn btn-primary" data-action="check-xdr-gpt-compatibility" data-type="operation-gpt">
+                                    <i class="fas fa-check"></i> 检测运营GPT兼容性
+                                </button>
+                            </div>
+                            
+                            <!-- 运营+流量检测GPT检测表单 -->
+                            <div id="xdr-gpt-operation-traffic-gpt-form" class="xdr-gpt-subform" style="display:none;">
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="xdr-gpt-operation-traffic-gpt-cpu-info">CPU核心数</label>
+                                        <input type="number" id="xdr-gpt-operation-traffic-gpt-cpu-info" class="form-control" placeholder="例如: 64">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="xdr-gpt-operation-traffic-gpt-memory-info">内存大小(GB)</label>
+                                        <input type="number" id="xdr-gpt-operation-traffic-gpt-memory-info" class="form-control" placeholder="例如: 512">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="xdr-gpt-operation-traffic-gpt-system-disk">系统盘大小(GB)</label>
+                                        <input type="number" id="xdr-gpt-operation-traffic-gpt-system-disk" class="form-control" placeholder="例如: 480">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="xdr-gpt-operation-traffic-gpt-data-disk">数据盘<span class="highlight">裸</span>容量大小(TB)</label>
+                                        <input type="number" id="xdr-gpt-operation-traffic-gpt-data-disk" class="form-control" placeholder="例如: 32">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="xdr-gpt-operation-traffic-gpt-gigabit-ports">千兆电口数量</label>
+                                        <input type="number" id="xdr-gpt-operation-traffic-gpt-gigabit-ports" class="form-control" placeholder="例如: 4">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="xdr-gpt-operation-traffic-gpt-10g-ports">万兆光口数量</label>
+                                        <input type="number" id="xdr-gpt-operation-traffic-gpt-10g-ports" class="form-control" placeholder="例如: 2">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="xdr-gpt-operation-traffic-gpt-raid-info">RAID卡型号</label>
+                                        <input type="text" id="xdr-gpt-operation-traffic-gpt-raid-info" class="form-control" placeholder="例如: 9560-16i">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="xdr-gpt-operation-traffic-gpt-gpu-type">显卡型号</label>
+                                        <input type="text" id="xdr-gpt-operation-traffic-gpt-gpu-type" class="form-control" placeholder="例如: 4090">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="xdr-gpt-operation-traffic-gpt-gpu-count">显卡数量</label>
+                                        <input type="number" id="xdr-gpt-operation-traffic-gpt-gpu-count" class="form-control" placeholder="例如: 8">
+                                    </div>
+                                </div>
+                                
+                                <button class="btn btn-primary" data-action="check-xdr-gpt-compatibility" data-type="operation-traffic-gpt">
+                                    <i class="fas fa-check"></i> 检测运营+流量检测GPT兼容性
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div id="compatibility-result" class="result-box">
+                            <h4><i class="fas fa-info-circle"></i> 检测结果</h4>
+                            <p id="result-text"></p>
+                        </div>
+                    </div>
+                </div>
+                
+                    
+                    </div>
+                </div>
+            </section>
+            
+            <section class="detail-section" id="detail-section">
+                <div class="detail-header">
+                    <h2 class="detail-title">
+                        <i class="fas fa-robot" id="scenario-icon"></i>
+                        <span id="scenario-title">GPT 部署</span>
+                    </h2>
+                    <button class="btn btn-outline" data-action="back-to-selection">
+                        <i class="fas fa-arrow-left"></i> 返回方案选择
+                    </button>
+                </div>
+                
+                <div class="tabs">
+                    <div class="tab active" data-action="open-tab" data-tab="packages">软件包及工具准备</div>
+                    <div class="tab" data-action="open-tab" data-tab="compatibility">软件兼容性</div>
+                    <div class="tab" data-action="open-tab" data-tab="topology">部署拓扑</div>
+                    <div class="tab" data-action="open-tab" data-tab="ports">端口矩阵</div>
+                    <div class="tab" data-action="open-tab" data-tab="steps">部署步骤</div>
+                </div>
+                
+                <div id="packages" class="tab-content active">
+                    <h3><i class="fas fa-box-open"></i> 软件包及工具准备</h3>
+                    
+                    <div class="compatibility-card">
+                        <div class="card-status">
+                            <div class="status-dot status-approved"></div>
+                            <span>基础工具</span>
+                        </div>
+                        <ul class="specs">
+                            <li><span class="spec-name">Chrome浏览器</span><span class="spec-value">用于访问Web控制台 <a href="https://www.google.com/chrome/" target="_blank">[官网下载]</a></span></li>
+                            <li><span class="spec-name">MobaXterm软件</span><span class="spec-value">用于通过SSH访问 <a href="https://mobaxterm.mobatek.net/" target="_blank">[官网下载]</a></span></li>
+                            <li><span class="spec-name">Winscp软件</span><span class="spec-value">用于异常情况下上传bin包到后台 <a href="https://winscp.net/" target="_blank">[官网下载]</a></span></li>
+                        </ul>
+                    </div>
+                    
+                    <div id="gpt-packages" style="display:none;">
+                        <div class="compatibility-card">
+                            <div class="card-status">
+                                <div class="status-dot status-warning"></div>
+                                <span>升级包(仅老版本升级需要)</span>
+                            </div>
+                            <ul class="specs">
+                                <li><span class="spec-name">XDR_GPT_SYSTEM_*.bin</span><span class="spec-value">运营+检测GPT系统升级包</span></li>
+                                <li><span class="spec-name">SEC_GPT_SYSTEM_*.bin</span><span class="spec-value">纯检测GPT系统升级包</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div id="xdr-packages" style="display:none;">
+                        <div class="compatibility-card">
+                            <div class="card-status">
+                                <div class="status-dot status-warning"></div>
+                                <span>虚拟化部署专用(仅虚拟化部署需要)</span>
+                            </div>
+                            <ul class="specs">
+                                <li><span class="spec-name">qcow2镜像包</span><span class="spec-value">用于导入基础镜像</span></li>
+                                <li><span class="spec-name">业务初始化/bin包</span><span class="spec-value">用于业务初始化</span></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="compatibility-card">
+                            <div class="card-status">
+                                <div class="status-dot status-warning"></div>
+                                <span>升级包(仅老版本升级需要)</span>
+                            </div>
+                            <ul class="specs">
+                                <li><span class="spec-name">XDR-2.0.42_Deploy_*.bin</span><span class="spec-value">XDR系统升级包</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="compatibility" class="tab-content">
+                    <h3><i class="fas fa-check-circle"></i> 软件兼容性说明</h3>
+                    <p>以下为当前部署方案的兼容性要求：</p>
+                    
+                    <div class="compatibility-grid">
+                        <div class="compatibility-card">
+                            <div class="card-status">
+                                <div class="status-dot status-approved"></div>
+                                <span>硬件部署</span>
+                            </div>
+                            <ul class="specs">
+                                <li><span class="spec-name">适配硬件</span><span class="spec-value" id="compatibility-hardware">H8230及宽恒设备</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="topology" class="tab-content">
+                    <h3><i class="fas fa-project-diagram"></i> 部署拓扑说明</h3>
+                    <p>XDR跟GPT集群的整体拓扑如下图所示：</p>
+                    
+                    <div class="topology-diagram">
+                        <img src="https://support.sangfor.com.cn/_static/202507/83e7f54f61e511f084e6fa163e0bdd14.png" alt="XDR与GPT部署拓扑图" class="topology-img">
+                    </div>
+                    
+                    <div class="topology-notes">
+                        <h4>拓扑说明</h4>
+                        <ol>
+                            <li>XDR跟GPT集群在2.0.42版本之后变成两个独立的集群，增加架构以及部署的灵活性（支持信创GPT集群对接非信创XDR集群，反之亦然），支持能力单独演进，老架构（版本小于等于2.0.40）的XDR跟GPT在同一个集群耦合度比较高，不利于单独的能力演进；</li>
+                            <li>XDR集群至少需要3节点起步做一个集群，GPT集群则不同，GPT集群至少需要1节点起步做集群；</li>
+                            <li>XDR跟GPT两个集群都支持管理口、业务口复用，数据口必须为单独的网口，目前数据口主要涉及两个集群通信的流量；</li>
+                            <li>GPT集群为1个节点的时候，也需要做集群，便于后续扩容演进，同样也需要接入数据口，否则集群无法正常使用；</li>
+                            <li>XDR集群跟GPT集群对接时，使用数据口进行对接，需要XDR集群数据口到GPT集群数据口Vip以及GPT集群数据口到XDR集群数据口Vip双向放通相关的网络权限，请务必注意</li>
+                            <li>XDR支持虚拟化部署，GPT集群只支持适配硬件部署，详细兼容性信息请查看兼容性列表；</li>
+                            <li>只有XDR集群时也需要填写数据口Vip；</li>
+                        </ol>
+                    </div>
+                    
+                    <!-- 数据底座部署拓扑 -->
+                    <div id="data-base-topology" style="display:none; margin-top: 30px;">
+                        <h4><i class="fas fa-project-diagram"></i> 数据底座部署拓扑</h4>
+                        <p>数据底座使用外部连接部署拓扑如下图所示：</p>
+                        
+                        <div class="topology-diagram">
+                            <img src="https://support.sangfor.com.cn/_static/202508/41efe7227fe011f084e6fa163e0bdd14.png" alt="数据底座部署拓扑图" class="topology-img">
+                        </div>
+                        
+                        <div class="topology-notes">
+                            <h4>数据底座拓扑说明</h4>
+                            <ol>
+                                <li>数据底座采用外部连接方式部署，支持与AI安全平台集群对接；</li>
+                                <li>数据底座需要配置专用的数据口用于与AI安全平台通信；</li>
+                                <li>部署时需要确保数据底座到AI安全平台集群数据口Vip的网络连通性；</li>
+                                <li>数据底座支持高可用部署架构，确保数据处理的可靠性；</li>
+                                <li>部署完成后需要进行网络连通性测试，确保各组件正常通信。</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="ports" class="tab-content">
+                    <h3><i class="fas fa-plug"></i> 端口矩阵说明</h3>
+                    <p>以下是XDR和GPT部署所需的端口配置：</p>
+                    
+                    <table class="ports-table">
+                        <thead>
+                            <tr>
+                                <th>服务名称</th>
+                                <th>端口号</th>
+                                <th>协议</th>
+                                <th>方向</th>
+                                <th>用途说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>XDR-GPT通信</td>
+                                <td>31001,31003,31004,443</td>
+                                <td>TCP</td>
+                                <td>双向</td>
+                                <td>XDR与GPT集群间通信</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <!-- 数据底座端口矩阵 -->
+                    <div id="data-base-ports" style="display:none; margin-top: 20px;">
+                        <h4><i class="fas fa-network-wired"></i> 数据底座端口矩阵</h4>
+                        <table class="ports-table">
+                            <thead>
+                                <tr>
+                                    <th>方向</th>
+                                    <th>需要放通IP/域名</th>
+                                    <th>需要放通的端口</th>
+                                    <th>用途</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>安全数据底座→AI安全平台</td>
+                                    <td>AI安全平台集群数据口Vip</td>
+                                    <td>TCP ALL</td>
+                                    <td>安全数据底座对接AI安全平台</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div id="steps" class="tab-content">
+                    <h3><i class="fas fa-list-ol"></i> 部署步骤说明</h3>
+                    
+                    <div class="deployment-status">
+                        <div class="status-indicator"></div>
+                        <span>部署进度: <span id="progress-text">0%</span></span>
+                    </div>
+                    
+                    <div class="steps-container">
+                        <!-- 新增的网络规划步骤 -->
+                        <div class="step" id="step1">
+                            <div class="step-number"></div>
+                            <div class="step-content">
+                                <h4 class="step-title">1. 网络规划</h4>
+                                <p class="step-description">规划XDR和GPT集群的网络配置，包括管理口、IPMI口、业务口和数据口的IP分配。</p>
+                                
+                                <div style="margin-top: 15px; overflow-x: auto;">
+                                    <table class="network-table">
+                                        <thead>
+                                            <tr>
+                                                <th>集群类型</th>
+                                                <th>网络平面名称</th>
+                                                <th>IP规划</th>
+                                                <th>作用</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td rowspan="4">XDR集群</td>
+                                                <td>管理口网络</td>
+                                                <td>N台服务器需要N+1个IP，需要了解网关地址</td>
+                                                <td>提供分布式XDR对外WebUI访问</td>
+                                            </tr>
+                                            <tr>
+                                                <td>IPMI口网络</td>
+                                                <td>N台服务器需要N个IP，需要了解网关地址</td>
+                                                <td>IPMI接口通信使用，避免管理网络无法连接上</td>
+                                            </tr>
+                                            <tr>
+                                                <td>业务口网络</td>
+                                                <td>支持复用管理口，非复用场景下，N台服务器需要N+1个IP</td>
+                                                <td>组件上报数据给分布式XDR分析</td>
+                                            </tr>
+                                            <tr>
+                                                <td>数据口网络</td>
+                                                <td>N台服务器需要N+1个IP</td>
+                                                <td>微服务内部通信使用以及集群对接使用</td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="4">GPT集群</td>
+                                                <td>管理口网络</td>
+                                                <td>N台服务器需要N+1个IP，需要了解网关地址</td>
+                                                <td>提供分布式XDR对外WebUI访问</td>
+                                            </tr>
+                                            <tr>
+                                                <td>IPMI口网络</td>
+                                                <td>N台服务器需要N个IP，需要了解网关地址</td>
+                                                <td>IPMI接口通信使用，避免管理网络无法连接上</td>
+                                            </tr>
+                                            <tr>
+                                                <td>业务口网络</td>
+                                                <td>支持复用管理口，非复用场景下，N台服务器需要N+1个IP</td>
+                                                <td>组件上报数据给分布式XDR分析</td>
+                                            </tr>
+                                            <tr>
+                                                <td>数据口网络</td>
+                                                <td>N台服务器需要N+1个IP</td>
+                                                <td>微服务内部通信使用以及集群对接使用</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                <div class="step-actions" style="margin-top: 15px;">
+                                    <button class="btn btn-sm btn-primary" data-action="complete-step" data-step="step1">标记完成</button>
+                                    <button class="btn btn-sm btn-secondary" data-action="open-url" data-url="https://support.sangfor.com.cn/productDocument/read?product_id=141&version_id=1132&category_id=332705">查看详情</button>
+                                </div>
+                                <div class="step-completed">
+                                    <i class="fas fa-check"></i> 已完成
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="step" id="step2">
+                            <div class="step-number"></div>
+                            <div class="step-content">
+                                <h4 class="step-title">2. 配置各节点网络</h4>
+                                <p class="step-description">配置所有节点的网络参数，包括IP地址、子网掩码、网关和DNS设置，确保节点间网络互通。</p>
+                                <div class="step-actions">
+                                    <button class="btn btn-sm btn-primary" data-action="complete-step" data-step="step2">标记完成</button>
+                                    <button class="btn btn-sm btn-secondary" data-action="open-url" data-url="https://support.sangfor.com.cn/productDocument/read?product_id=141&version_id=1132&category_id=332705">查看详情</button>
+                                </div>
+                                <div class="step-completed">
+                                    <i class="fas fa-check"></i> 已完成
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="step" id="step3">
+                            <div class="step-number"></div>
+                            <div class="step-content">
+                                <h4 class="step-title">3. 添加节点</h4>
+                                <p class="step-description">将各节点添加到集群中，配置节点角色和功能分配。</p>
+                                <div class="step-actions">
+                                    <button class="btn btn-sm btn-primary" data-action="complete-step" data-step="step3">标记完成</button>
+                                    <button class="btn btn-sm btn-secondary" data-action="open-url" data-url="https://support.sangfor.com.cn/productDocument/read?product_id=141&version_id=1132&category_id=332705">查看详情</button>
+                                </div>
+                                <div class="step-completed">
+                                    <i class="fas fa-check"></i> 已完成
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="step" id="step4">
+                            <div class="step-number"></div>
+                            <div class="step-content">
+                                <h4 class="step-title">4. 集群基础服务初始化</h4>
+                                <p class="step-description">初始化集群基础服务，包括认证服务、日志服务和监控服务。</p>
+                                <div class="step-actions">
+                                    <button class="btn btn-sm btn-primary" data-action="complete-step" data-step="step4">标记完成</button>
+                                    <button class="btn btn-sm btn-secondary" data-action="open-url" data-url="https://support.sangfor.com.cn/productDocument/read?product_id=141&version_id=1132&category_id=332705">查看详情</button>
+                                </div>
+                                <div class="step-completed">
+                                    <i class="fas fa-check"></i> 已完成
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="step" id="step5">
+                            <div class="step-number"></div>
+                            <div class="step-content">
+                                <h4 class="step-title">5. 集群授权</h4>
+                                <p class="step-description">配置集群授权信息，包括许可证导入和功能授权。</p>
+                                <div class="step-actions">
+                                    <button class="btn btn-sm btn-primary" data-action="complete-step" data-step="step5">标记完成</button>
+                                    <button class="btn btn-sm btn-secondary" data-action="open-url" data-url="https://support.sangfor.com.cn/productDocument/read?product_id=141&version_id=1132&category_id=332707">查看详情</button>
+                                </div>
+                                <div class="step-completed">
+                                    <i class="fas fa-check"></i> 已完成
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="step" id="step6">
+                            <div class="step-number"></div>
+                            <div class="step-content">
+                                <h4 class="step-title">6. 集群业务服务初始化</h4>
+                                <p class="step-description">初始化业务服务，包括安全分析引擎、威胁检测服务和响应工作台。</p>
+                                <div class="step-actions">
+                                    <button class="btn btn-sm btn-success" data-action="complete-step" data-step="step6">完成部署</button>
+                                    <button class="btn btn-sm btn-secondary" data-action="open-url" data-url="https://support.sangfor.com.cn/productDocument/read?product_id=141&version_id=1132&category_id=332705">查看详情</button>
+                                </div>
+                                <div class="step-completed">
+                                    <i class="fas fa-check"></i> 已完成
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 20px; padding: 15px; background: rgba(30, 41, 59, 0.7); border-radius: 8px; border: 1px solid #334155;">
+                        <p><i class="fas fa-clock"></i> <strong>预计部署时间:</strong> 70分钟 (不包含上传包时间)</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- 虚拟化部署兼容性 -->
+        <section class="hardware-section" id="virtualization-compatibility">
+            <div class="section-header" data-action="toggle-section">
+                <h3 class="section-title"><i class="fas fa-cloud"></i> 虚拟化部署兼容性</h3>
+                <button class="toggle-btn">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+            
+            <div class="hardware-content" style="display:none">
+                <!-- XDR+GPT部署方案虚拟化兼容性 -->
+                <div class="deployment-scheme" style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(29, 78, 216, 0.05) 100%); border: 1px solid rgba(37, 99, 235, 0.3); border-radius: 12px; padding: 25px; margin-bottom: 30px; box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15); position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: rgba(37, 99, 235, 0.1); border-radius: 50%; z-index: 0;"></div>
+                    <div style="position: relative; z-index: 1;">
+                        <h3 style="color: #2563eb; margin-bottom: 25px; display: flex; align-items: center; gap: 12px; font-size: 1.5rem; font-weight: 700;">
+                            <span style="background: rgba(37, 99, 235, 0.2); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-shield-alt" style="color: #2563eb;"></i>
+                            </span>
+                            XDR+GPT部署方案虚拟化兼容性
+                        </h3>
+                        
+                        <div class="hardware-grid" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+                            <!-- XDR虚拟化兼容性 -->
+                            <div class="hardware-item" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(37, 99, 235, 0.3); border-radius: 10px; padding: 20px; backdrop-filter: blur(10px); flex: 1; min-width: 350px; max-width: 500px;">
+                                <h4 class="hardware-title" style="color: #3b82f6; display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                                    <i class="fas fa-shield-alt" style="color: #2563eb;"></i>
+                                    XDR虚拟化兼容性
+                                </h4>
+                                <ul class="specs">
+                                    <li><span class="spec-value">深信服HCI 6.8.0+</span></li>
+                                    <li><span class="spec-value">VMware ESXI 7.0+</span></li>
+                                    <li><span class="spec-value">华为云FusionCompute 8.0+</span></li>
+                                    <li><span class="spec-value">华为云HCS 8.0+</span></li>
+                                    <li><span class="spec-value">阿里云Apsara Uni-manager 3.16.2+</span></li>
+                                </ul>
+                            </div>
+                            
+                            <!-- GPT虚拟化兼容性 -->
+                            <div class="hardware-item" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(37, 99, 235, 0.3); border-radius: 10px; padding: 20px; backdrop-filter: blur(10px); flex: 1; min-width: 350px; max-width: 500px;">
+                                <h4 class="hardware-title" style="color: #3b82f6; display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                                    <i class="fas fa-robot" style="color: #2563eb;"></i>
+                                    GPT虚拟化兼容性
+                                </h4>
+                                <div class="virtualization-warning" style="background: rgba(245, 158, 11, 0.15); border: 1px solid #f59e0b; border-radius: 8px; padding: 12px; margin-bottom: 12px;">
+                                    <h5 style="color: #f59e0b; margin-bottom: 8px;"><i class="fas fa-exclamation-triangle"></i> 重要提示</h5>
+                                    <p style="font-size: 0.9rem; margin: 0;">GPT默认不支持虚拟化交付。需要虚拟化交付请联系产品线定制团队进行特殊定制。</p>
+                                </div>
+                                <ul class="specs">
+                                    <li><span class="spec-name">部署方式</span><span class="spec-value">需定制团队支持</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hardware-grid" style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;">
+                    
+                    <!-- 数据底座虚拟化兼容性 -->
+                    <div class="hardware-item" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 10px; padding: 15px; backdrop-filter: blur(10px); flex: 1; min-width: 300px; max-width: 400px;">
+                        <h4 class="hardware-title" style="color: #10b981; display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                            <i class="fas fa-database" style="color: #10b981;"></i>
+                            数据底座虚拟化
+                        </h4>
+                        <ul class="specs">
+                            <li><span class="spec-value">深信服HCI 6.8.0+</span></li>
+                            <li><span class="spec-value">VMware ESXI 7.0+</span></li>
+                            <li><span class="spec-value">华为云FusionCompute 8.0+</span></li>
+                            <li><span class="spec-value">华为云HCS 8.0+</span></li>
+                            <li><span class="spec-value">阿里云Apsara Uni-manager 3.16.2+</span></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- AI安全平台虚拟化兼容性 -->
+                    <div class="hardware-item" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 10px; padding: 15px; backdrop-filter: blur(10px); flex: 1; min-width: 300px; max-width: 400px;">
+                        <h4 class="hardware-title" style="color: #10b981; display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                            <i class="fas fa-brain" style="color: #10b981;"></i>
+                            AI安全平台虚拟化
+                        </h4>
+                        <ul class="specs">
+                            <li><span class="spec-value">深信服HCI 6.8.0+</span></li>
+                            <li><span class="spec-value">VMware ESXI 7.0+</span></li>
+                            <li><span class="spec-value">华为云FusionCompute 8.0+</span></li>
+                            <li><span class="spec-value">华为云HCS 8.0+</span></li>
+                            <li><span class="spec-value">阿里云Apsara Uni-manager 3.16.2+</span></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- AICP虚拟化兼容性 -->
+                    <div class="hardware-item" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 10px; padding: 15px; backdrop-filter: blur(10px); flex: 1; min-width: 300px; max-width: 400px;">
+                        <h4 class="hardware-title" style="color: #10b981; display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                            <i class="fas fa-cogs" style="color: #10b981;"></i>
+                            AICP虚拟化
+                        </h4>
+                        <div class="virtualization-warning" style="background: rgba(245, 158, 11, 0.15); border: 1px solid #f59e0b; border-radius: 8px; padding: 12px; margin-bottom: 12px;">
+                            <h5 style="color: #f59e0b; margin-bottom: 8px;"><i class="fas fa-exclamation-triangle"></i> 重要提示</h5>
+                            <p style="font-size: 0.9rem; margin: 0;">AICP默认不支持虚拟化交付。需要虚拟化交付请联系产品线定制团队进行特殊定制。</p>
+                        </div>
+                        <ul class="specs">
+                            <li><span class="spec-name">部署方式</span><span class="spec-value">需定制团队支持</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <footer class="footer">
+            <p>© 2025 部署方案向导 | 适用于42及以上版本XDR+GPT&AI安全平台 | Author: Xing.He.99119 | make by 2025-08-20 |  OnboardX</p>
+        </footer>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>
